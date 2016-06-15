@@ -15,26 +15,26 @@
 @mixin breakpoint($viewport) {
 	// extra large
 	@if $viewport == xl {
-		@media (min-width: $breakpoint-xl) { 				
+		@media screen and (min-width: $breakpoint-xl) { 				
 			@content; 
 		}
 	}
 
 	// large
 	@if $viewport == lg {
-		@media (min-width: $breakpoint-lg) { 				
+		@media screen and (min-width: $breakpoint-lg) { 				
 			@content; 
 		}
 	}
 	// medium
 	@else if $viewport == md {
-		@media (min-width: $breakpoint-md) { 
+		@media screen and (min-width: $breakpoint-md) { 
 			@content; 
 		}
 	}
 	// small
 	@else if $viewport == sm {
-		@media (min-width: $breakpoint-sm)  {
+		@media screen and (min-width: $breakpoint-sm)  {
 			@content; 
 		}
 	}
