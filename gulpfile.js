@@ -2,7 +2,6 @@
 
 // require modules
 var autoprefixer 	= require('gulp-autoprefixer'),
-	cleancss 		= require('gulp-clean-css'),
 	header 			= require('gulp-header'),
 	gulp 			= require('gulp'),
 	rename 			= require('gulp-rename'),
@@ -56,7 +55,6 @@ gulp.task('sass', function() {
 	.pipe(autoprefixer({
 		browsers: ['last 2 versions']
 	}))
-	.pipe(cleancss()) // minify
 	.pipe(header(banner.content))
 	.pipe(rename('style.min.css'))
 	.pipe(gulp.dest('./'))
