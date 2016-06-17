@@ -8,16 +8,32 @@ var autoprefixer 	= require('gulp-autoprefixer'),
 	rename 			= require('gulp-rename'),
 	browserSync 	= require('browser-sync'),
 	sass 			= require('gulp-sass'),
-	sassGlob 		= require('gulp-sass-glob-import');
+	sassGlob 		= require('gulp-sass-glob-import'),
+	notify 			= require('gulp-notify'),
+	concat 			= require('gulp-concat'),
+	uglify			= require('gulp-uglify');
 
 // browserSync var
 var reload      = browserSync.reload;
 
 // paths for browserSync
 var src = {
-    scss: 'sass/**/*.scss',
-    html: '*.html'
+	scss: 	'sass/**/*.scss',
+	js: 	'js/**/*.js',
+	html: 	'*.html'
 };
+
+/**
+ * Handle errors with Gulp Notify
+ */
+function handleErrors() {
+	var args = Array.prototype.slice.call(arguments);
+	notify.onError({
+		title: 'Compile Error',
+		message: '<%= error.message %>'
+	}).apply(this, args);
+	this.emit('end'); // Keep gulp from hanging on this task
+}
 
 var banner = {
 	content :
@@ -32,29 +48,47 @@ var banner = {
  */
 gulp.task('sass', function() {
 	return gulp.src('./sass/*.scss')
-		.pipe(sassGlob())
-		.pipe(sass({errLogToConsole: true}))
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions']
-		}))
-		.pipe(cleancss()) // minify
-		.pipe(header(banner.content))
-		.pipe(rename('style.min.css'))
-		.pipe(gulp.dest('./'))
-        .pipe(reload({stream: true}));
+	.pipe(sassGlob())
+	.pipe(sass({
+		outputStyle: 'compressed'
+	}))
+	.on('error', handleErrors)
+	.pipe(autoprefixer({
+		browsers: ['last 2 versions']
+	}))
+	.pipe(cleancss()) // minify
+	.pipe(header(banner.content))
+	.pipe(rename('style.min.css'))
+	.pipe(gulp.dest('./'))
+	.pipe(reload({stream: true}));
 });
+
+/**
+ * Concat, minify and check errors on JS files
+ */
+gulp.task('scripts', function() {
+	return gulp.src('./js/*.js')
+	.pipe(concat('scripts.js'))
+	.pipe(uglify())
+	.on('error', handleErrors)
+	.pipe(rename('scripts.min.js'))
+	.pipe(gulp.dest('./'))
+	.pipe(browserSync.reload({stream:true}));
+});
+
 
 /**
  *  Browser sync
  */
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['sass', 'scripts'], function() {
 
-    browserSync({
-        server: "./"
-    });
+	browserSync({
+		server: "./"
+	});
 
-    gulp.watch(src.scss, ['sass']);
-    gulp.watch(src.html).on('change', reload);
+	gulp.watch(src.scss, ['sass']);
+	gulp.watch(src.js, ['scripts']);
+	gulp.watch(src.html).on('change', reload);
 });
 
 /**
