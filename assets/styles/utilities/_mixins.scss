@@ -1,0 +1,94 @@
+/**
+ * Combine hover & focus styles
+ */
+@mixin hocus {
+	&:hover,
+	&:focus {
+		@content;
+	}
+}
+
+/**
+ * Font smoothing
+ */
+ @mixin font-smoothing($enabled: true) {
+    @if $enabled {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    } @else {
+        -webkit-font-smoothing: initial;
+        -moz-osx-font-smoothing: initial;
+    }
+}
+
+/**
+ * Media query breakpoints mixins
+ *
+ * Usage:
+ * div { width: 60px;
+ *    @include breakpoint-min($small) { width: 80px; }
+ * }
+ */
+ @mixin bp-min($point: 0) {
+    @media (min-width: $point) {
+        @content;
+    }
+}
+
+@mixin bp-max($point: 0) {
+    @media (max-width: ($point - 0.0625em)) {
+        @content;
+    }
+}
+
+@mixin bp-min-max($min-point: 0, $max-point: 0) {
+    @media (min-width: $min-point) and (max-width: ($max-point - 0.0625em)) {
+        @content;
+    }
+}
+
+/**
+ * For image replacement
+ */
+ @mixin hide-text {
+    font-family: a;
+    font-size: 0;
+    line-height: 0;
+    text-shadow: none;
+    color: transparent;
+    background-color: transparent;
+    border: 0 none;
+}
+
+/**
+ * Block layout
+ */
+@mixin block($size: large) {
+    margin-left: auto; margin-right: auto;
+    padding-left: 25px; padding-right: 25px;
+    @include bp-min($small) {
+        @if ($size != full) {
+            max-width: calc(#{map-get($site-widths, $size)} + 6vw + 4rem);
+        }
+        padding-left: calc(3vw + 2rem);
+        padding-right: calc(3vw + 2rem);
+    }
+    .no-csscalc &,
+    .no-cssvwunit & {
+        max-width: map-get($site-widths, $size);
+    }
+}
+
+/**
+ * Row layout
+ */
+@mixin row-top($size: medium) {
+    padding-top: calc(#{map-get($row-margins, $size)} + 2rem);
+}
+@mixin row-bottom($size: medium) {
+    padding-bottom: calc(#{map-get($row-margins, $size)} + 2rem);
+}
+@mixin row($size: medium) {
+    @include row-top($size);
+    @include row-bottom($size);
+}

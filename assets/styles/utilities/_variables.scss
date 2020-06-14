@@ -1,0 +1,51 @@
+// Color palette
+$white: #FFFFFF;
+$black: #000000;
+$gray: #CCCCCC;
+$gray-dark: #222222;
+$blue: #2980b9;
+
+// Color usage
+$body-background-color: $white;
+$text-color: $gray-dark;
+
+$primary-color: $blue;
+$secondary-color: $gray;
+
+// Font settigns
+$system-font: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$base-font: $system-font;
+$base-font-size: 1em;
+$base-line-height: 	1.65;
+
+// Magic numbers
+$gutter-small: 1rem;
+$gutter: 2rem;
+$gutter-large: 4rem;
+$gutter-huge: 6rem;
+
+/**
+ * Widths & Sizes
+ */
+$site-width-small: 660px;
+$site-width-medium: 940px;
+$site-width-large: 1200px;
+
+$site-widths: (
+    small: $site-width-small,
+    medium: $site-width-medium,
+    large: $site-width-large,
+);
+
+$row-margins: (
+    small: 1.5vw,
+    medium: 3vw,
+    large: 6vw,
+);
+
+// Breakpoints
+$small: 30em;
+$medium: 48em;
+$large: 68em;
+$huge: 80em;

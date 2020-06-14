@@ -1,0 +1,66 @@
+@import '../../node_modules/normalize.css/normalize';
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    @include font-smoothing;
+    background-color: $body-background-color;
+    color: $text-color;
+    font-family: $base-font;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-feature-settings: "kern" on;
+    @include bp-min($small) {
+        background: papayawhip;
+    }
+    @include bp-min($medium) {
+        background: lemonchiffon;
+    }
+    @include bp-min($large) {
+        background: mistyrose;
+    }
+}
+
+main {
+    @include block; @include row;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.2;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+a[href="#"] {
+    cursor: not-allowed;
+}
+
+figure {
+    margin: 0;
+}
+
+img,
+object,
+iframe,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+@import 'modules/*';

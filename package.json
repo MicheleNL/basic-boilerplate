@@ -1,23 +1,27 @@
 {
   "name": "boilerplate",
   "version": "1.0.0",
-  "description": "This is a very basic HTML, Sass gulpfile with browserSync",
+  "description": "A very minimal gulp setup with browserSync",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Michèle",
+  "author": "Michèle van den Aardweg",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.13.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.0",
-    "gulp-header": "^1.8.2",
-    "gulp-notify": "^2.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.1",
+    "gulp-header": "^2.0.9",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
     "gulp-sass-glob-import": "^0.1.0",
-    "gulp-uglify": "^1.5.3"
+    "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.4",
+    "normalize.css": "^8.0.1"
   }
 }
